@@ -27,7 +27,7 @@ a {
     justify-content: space-around;
     flex-direction: row;
     gap: 15%;
-    border: 3px black solid;
+    border: 3px solid black;
     grid-area: nav;
     list-style: none;
     padding: 3%;
@@ -53,33 +53,34 @@ a {
     margin: 0% 5% 3%;
 }
 
+
+.story {
+    border: 3px solid black;
+}
+
 .story-1 {
-    border: 3px black solid;
-    border-top: 1px;
-    border-right: 1px;
+    border-top-width: 1px;
+    border-right-width: 1px;
 }
 
 .story-2 {
-    border: 3px black solid;
-    border-top: 1px;
+    border-top-width: 1px;
 }
 
 .story-3 {
-    border: 3px black solid;
-    border-top: 1px;
-    border-left: 1px;
+    border-top-width: 1px;
+    border-left-width: 1px;
 }
 
 .story-4 {
-    border: 3px black solid;
-    border-top: 1px;
+    border-top-width: 1px;
+    border-right-width: 1px;
 }
 
 .story-5 {
     grid-area: story-5;
-    border: 3px black solid;
-    border-top: 1px;
-    border-left: 1px;
+    border-top-width: 1px;
+    border-left-width: 1px;
 }
 
 .article-img {
@@ -95,5 +96,4 @@ a {
         "nav nav nav"
         "story-1 story-2 story-3"
         "story-4 story-5 story-5";
-
 }

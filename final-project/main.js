@@ -2,6 +2,7 @@ let row = 0;
 let column = 1;
 let userWord = [];
 let wordOfTheDay;
+
 const wordURL = "https://words.dev-apis.com/word-of-the-day";
 
 function getWordOfTheDay() {
@@ -12,102 +13,112 @@ function getWordOfTheDay() {
       return processingPromise;
     })
     .then(function (processedResponse) {
-      const wordOfTheDay = processedResponse.word;
-      console.log(wordOfTheDay);
+      wordOfTheDay = processedResponse.word;
     });
 }
 getWordOfTheDay();
+
 function createBoard() {
   let row = document.querySelector(".square__container");
-  for (let i = 1; i < 31; i++) {
-    let square = document.createElement("div");
-    square.classList.add(`square`);
-    square.classList.add(`square-${i}`);
-    row.appendChild(square);
-    document.querySelector("main").appendChild(row);
+  for (let linhas = 1; linhas < 7; linhas++) {
+    for (let colunas = 1; colunas < 6; colunas++) {
+      let square = document.createElement("div");
+      square.classList.add(`square`);
+      square.classList.add(`square-${linhas}-${colunas}`);
+      row.appendChild(square);
+      document.querySelector("main").appendChild(row);
+    }
   }
 }
 
-/* 0,0
-0,5 =
-1,0 =
-1,1 =
-1,4
-2,5
-3,0
-
-let tries = 3;
-let position = 0;
-
-let currentIndex = 0;
-if (tries === 0) {
-  currentIndex = tries + position;
-} else {
-  currentIndex = (tries * 5) + position + tries;
-} */
-
-document.querySelector("square");
-console.log(document.querySelector(".square"));
-const isLetter = (value) => /^[a-zA-Z]$/.test(value);
+function isLetter(value) {
+  return /^[a-zA-Z]$/.test(value);
+}
 
 document.addEventListener("keydown", function (event) {
   if (isLetter(event.key) === true) {
     userWord.push(event.key);
     console.log(isLetter(event.key));
+    row++;
   }
 
-  let currentIndex = 0;
-  if (row === 0) {
-    currentIndex = row + column;
-  } else {
-    currentIndex = row * 5 + column + row;
-  }
-
-  let squareElement = document.querySelector(`.square-${currentIndex}`);
-  console.log({ tries: row, position: column, currentIndex, squareElement });
+  let squareElement = document.querySelector(`.square-${column}-${row}`);
 
   if (event.key === "Backspace") {
     userWord.pop();
-    const previousElement = document.querySelector(
-      `.square-${currentIndex - 1}`
-    );
-
+    const previousElement = document.querySelector(`.square-${column}-${row}`);
     previousElement.innerHTML = "";
-    if (column > 0) column--;
+    if (column > 0) row--;
     return;
   }
 
   if (event.key === "Enter" && userWord.length === 5) {
-    verifyWord();
+    verifyIfWordExists();
     return;
   }
 
-  if (!isLetter(event.key) || event.key.length > 1) return;
+  if (!isLetter(event.key)) return;
 
   squareElement.innerText = event.key.toUpperCase();
-
-  if (column === 5) {
-    row++;
-    column = 0;
-  } else {
-    column++;
-  }
-  console.log(userWord);
 });
 
+function verifyIfWordExists() {
+  const validatorURL = "https://words.dev-apis.com/validate-word";
+  fetch(validatorURL, {
+    method: "POST",
+    body: JSON.stringify({
+      word: userWord.join("").toLowerCase(),
+    }),
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      if (data.validWord === true) {
+        verifyWord();
+      } else {
+        for (let i = 1; i < 6; i++) {
+          let squareElement = document.querySelector(`.square-${column}-${i}`);
+
+          squareElement.style.backgroundColor = "red";
+          setTimeout(function () {
+            squareElement.style.backgroundColor = "white";
+          }, 1000);
+          clear();
+        }
+      }
+    });
+}
+
 function verifyWord() {
-  console.log(userWord);
   const word = userWord.join("").toLowerCase();
-  console.log(word === wordOfTheDay);
   if (word === wordOfTheDay) {
     alert("You win!");
+    for (let i = 1; i < 6; i++) {
+      let squareElement = document.querySelector(`.square-${column}-${i}`);
+      squareElement.style.backgroundColor = "green";
+    }
   } else {
-    alert("You lose!");
-    clear();
+    for (let i = 1; i < 6; i++) {
+      for (let j = 0; j < word.length; j++) {
+        if (word[j] === wordOfTheDay[j]) {
+          let squareElement = document.querySelector(`.square-${column}-${i}`);
+          squareElement.style.backgroundColor = "green";
+        } else {
+          let squareElement = document.querySelector(`.square-${column}-${i}`);
+          squareElement.style.backgroundColor = "red";
+        }
+      }
+    }
   }
 }
 createBoard();
 
 function clear() {
   userWord = [];
+  row = 0;
+  for (let i = 1; i < 6; i++) {
+    let squareElement = document.querySelector(`.square-${column}-${i}`);
+    squareElement.innerHTML = "";
+  }
 }

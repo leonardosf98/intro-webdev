@@ -1,0 +1,174 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
+:root {
+  --primary-color: rgb(23, 100, 167);
+  --secondary-color: rgb(57, 129, 192);
+  --background: rgb(187, 180, 180);
+}
+* {
+  box-sizing: border-box;
+}
+
+.pagina {
+  margin: 0;
+  background-color: var(--background);
+}
+
+.cabecalho {
+  background-color: var(--primary-color);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  grid-area: cabecalho;
+}
+
+.container__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.imagem__cabecalho {
+  width: auto;
+  height: auto;
+  max-height: 50px;
+  max-width: 50px;
+}
+
+.titulo__marca {
+  font-family: "Open Sans", sans-serif;
+  color: white;
+}
+
+.observacoes {
+  font-size: 12pt;
+  color: white;
+  grid-column-start: 2;
+  font-weight: 100;
+}
+
+.container__principal {
+  display: grid;
+  column-gap: 40px;
+  row-gap: 30px;
+  padding: 20px 30px 0;
+  grid-template-areas:
+    "itens nome"
+    "itens pagamento"
+    "resumo resumo"
+    "botao botao";
+  font-family: "Open Sans", sans-serif;
+  font-weight: 100;
+}
+
+.itens {
+  grid-area: itens;
+  width: 100%;
+  height: 100%;
+  padding: 8%;
+}
+
+.descricao__item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.container {
+  background-color: var(--secondary-color);
+  padding: 5%;
+  border-radius: 15px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.377);
+}
+
+.container__produto {
+  display: grid;
+  grid-template-columns: 42px 4fr 1fr;
+  border-bottom: 1px solid rgb(255, 255, 255);
+}
+
+.container__produto:last-child {
+  border-bottom: none;
+}
+
+.nome {
+  grid-area: nome;
+}
+
+.pagamento {
+  grid-area: pagamento;
+}
+
+.input {
+  border: 1px solid black;
+  background-color: transparent;
+  border-radius: 20px;
+  width: 100%;
+  height: 45px;
+  text-indent: 20px;
+  margin: 0% 0% 5%;
+  outline: none;
+}
+
+.container__input {
+  position: relative;
+}
+
+.etiqueta__input {
+  background-color: var(--secondary-color);
+  font-size: 11px;
+  border-left: 2px solid var(--secondary-color);
+  border-right: 2px solid var(--secondary-color);
+  pointer-events: none;
+  position: absolute;
+  top: -7px;
+  left: 27px;
+  z-index: 1;
+}
+
+.resumo__pedido {
+  grid-area: resumo;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  text-align: center;
+  margin: 0% 25% 0%;
+}
+
+.confirmar__pedido {
+  grid-area: botao;
+  height: 250%;
+  background-color: var(--secondary-color);
+  border-radius: 20px;
+  width: 99%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  justify-content: center;
+  border: none;
+}
+
+.confirmar__pedido:active {
+  background-color: rgb(48, 155, 191);
+}
+
+@media screen and (min-width: 300px) and (max-width: 900px) {
+  .container__principal {
+    display: grid;
+    grid-template-areas:
+      "itens"
+      "nome"
+      "pagamento"
+      "resumo"
+      "botao";
+  }
+
+  .total {
+    font-size: 23px;
+  }
+}

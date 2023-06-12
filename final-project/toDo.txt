@@ -1,0 +1,19 @@
+HTML
+
+*Criar base da página
+*Criar título
+*Criar container para os quadrados
+
+CSS
+*Estiizar titulo
+*Estilizar header
+*Estilizar os quadrados
+*Mudar fonte
+
+JS
+* Criar quadrados
+* Quando apertar Backspace deve remover o conteúdo da coluna atual e voltar pra coluna anterior (não se aplica a linhas anteriores)
+* Avaliar a palavra quando preenchida a linha completamente
+    * Colorir as colunas de acordo com o resultado
+* Dar resultado completo quando a pessoa acertar
+

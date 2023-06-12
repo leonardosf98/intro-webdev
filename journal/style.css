@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Open+Sans&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+.brand-header {
+    grid-area: title;
+}
+
+.brand {
+    font-family: 'Dancing Script', cursive;
+    font-size: 60px;
+    text-align: center;
+    font-weight: 100;
+}
+
+a {
+    text-decoration: none;
+    color: #666;
+    font-size: 35px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    gap: 15%;
+    border: 3px solid black;
+    grid-area: nav;
+    list-style: none;
+    padding: 3%;
+    margin-bottom: 0;
+}
+
+.site-section {
+    text-decoration: none;
+    font-family: 'Open Sans', sans-serif;
+    color: #666;
+    font-weight: 900;
+}
+
+.article-title {
+    font-family: 'Dancing Script', cursive;
+    text-align: center;
+}
+
+.article-text {
+    font-family: 'Open Sans', sans-serif;
+    text-align: justify;
+    text-indent: 3%;
+    margin: 0% 5% 3%;
+}
+
+
+.story {
+    border: 3px solid black;
+}
+
+.story-1 {
+    border-top-width: 1px;
+    border-right-width: 1px;
+}
+
+.story-2 {
+    border-top-width: 1px;
+}
+
+.story-3 {
+    border-top-width: 1px;
+    border-left-width: 1px;
+}
+
+.story-4 {
+    border-top-width: 1px;
+    border-right-width: 1px;
+}
+
+.story-5 {
+    grid-area: story-5;
+    border-top-width: 1px;
+    border-left-width: 1px;
+}
+
+.article-img {
+    width: 60%;
+    margin: auto;
+    display: block;
+}
+
+.page {
+    display: grid;
+    grid-template-areas:
+        "title title title"
+        "nav nav nav"
+        "story-1 story-2 story-3"
+        "story-4 story-5 story-5";
+}

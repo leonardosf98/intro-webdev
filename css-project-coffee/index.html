@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Geek Specialty Coffee</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body class="pagina">
+    <header class="cabecalho">
+      <a class="container__link" href="/css-project-coffee/">
+        <img
+          class="imagem__cabecalho"
+          src="assets/caneca.png"
+          alt="imagem de caneca marrom"
+        />
+        <h1 class="titulo__marca">Geek Specialty Coffee</h1>
+      </a>
+    </header>
+    <main class="container__principal">
+      <section class="container itens">
+        <h2 class="titulo__itens">ITENS</h2>
+        <div class="container__produto">
+          <h3 class="quantidade__itens">1x</h3>
+          <h3 class="tipo__item">Cappuccino</h3>
+          <h3 class="valor__produto">R$9,00</h3>
+          <h3 class="observacoes">Pouca espuma</h3>
+        </div>
+        <div class="container__produto">
+          <h3 class="quantidade__itens">1x</h3>
+          <h3 class="tipo__item">Cappuccino</h3>
+          <h3 class="valor__produto">R$11,00</h3>
+          <h3 class="observacoes">Leite de aveia</h3>
+          <h3 class="observacoes">Dose de espresso adicional</h3>
+        </div>
+        <div class="container__produto">
+          <h3 class="quantidade__itens">1x</h3>
+          <h3 class="tipo__item">Pão na chapa</h3>
+          <h3 class="valor__produto">R$7,00</h3>
+          <h3 class="observacoes">Geléia</h3>
+        </div>
+      </section>
+      <section class="nome container">
+        <h2 class="titulo__nome">NOME</h2>
+        <div class="container__input">
+          <label for="nome" class="etiqueta__input">Nome para chamar</label>
+          <input class="input nome" type="text" id="nome" />
+        </div>
+      </section>
+      <section class="pagamento container">
+        <h2 class="titulo__pagamento">PAGAMENTO</h2>
+        <div class="container__input">
+          <label for="numero" class="etiqueta__input">Número do cartão</label>
+          <input class="input numero__cartao" type="text" id="numero" />
+        </div>
+        <div class="container__input">
+          <label for="cvv" class="etiqueta__input">Código de segurança</label>
+          <input class="input codigo__seguranca" type="text" id="cvv" />
+        </div>
+      </section>
+      <section class="resumo__pedido">
+        <p class="subtotal">Subtotal</p>
+        <p class="subtotal__valor">R$ 27,00</p>
+        <p class="taxas">Taxas</p>
+        <p class="taxas__valor">R$ 2,70</p>
+        <h2 class="total">Total</h2>
+        <h2 class="total">R$ 29,70</h2>
+      </section>
+      <button class="confirmar__pedido">Confirmar pedido</button>
+    </main>
+    <script src="main.js"></script>
+  </body>
+</html>

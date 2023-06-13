@@ -103,12 +103,12 @@ function verifyWord() {
           `.square-${column}-${j + 1}`
         );
         squareElement.style.backgroundColor = "green";
-      } /*else if (word.includes(wordOfTheDay[j])) {
+      } else if (wordOfTheDay.includes(word[j])) {
         let squareElement = document.querySelector(
-          `.square-${column}-${word.indexOf(wordOfTheDay[j])}`
+          `.square-${column}-${j + 1}`
         );
         squareElement.style.backgroundColor = "yellow";
-      }*/ else {
+      } else {
         let squareElement = document.querySelector(
           `.square-${column}-${j + 1}`
         );

@@ -1,4 +1,4 @@
-let row = 0;
+let row = 1;
 let column = 1;
 let userWord = [];
 let wordOfTheDay;
@@ -36,18 +36,18 @@ function isLetter(value) {
 }
 
 document.addEventListener("keydown", function (event) {
-  if (isLetter(event.key) === true) {
+  let squareElement = document.querySelector(`.square-${column}-${row}`);
+
+  if (isLetter(event.key) === true && userWord.length < 5) {
     userWord.push(event.key);
-    console.log(isLetter(event.key));
+    squareElement.innerText = event.key.toUpperCase();
     row++;
   }
 
-  let squareElement = document.querySelector(`.square-${column}-${row}`);
-
   if (event.key === "Backspace") {
     userWord.pop();
-    const previousElement = document.querySelector(`.square-${column}-${row}`);
-    previousElement.innerHTML = "";
+    let element = document.querySelector(`.square-${column}-${row - 1}`);
+    element.innerHTML = "";
     if (column > 0) row--;
     return;
   }
@@ -57,9 +57,7 @@ document.addEventListener("keydown", function (event) {
     return;
   }
 
-  if (!isLetter(event.key)) return;
-
-  squareElement.innerText = event.key.toUpperCase();
+  if (!isLetter(event.key) || userWord.length < 5) return;
 });
 
 function verifyIfWordExists() {
@@ -79,11 +77,10 @@ function verifyIfWordExists() {
       } else {
         for (let i = 1; i < 6; i++) {
           let squareElement = document.querySelector(`.square-${column}-${i}`);
-
           squareElement.style.backgroundColor = "red";
           setTimeout(function () {
             squareElement.style.backgroundColor = "white";
-          }, 1000);
+          }, 100);
           clear();
         }
       }
@@ -98,25 +95,43 @@ function verifyWord() {
       let squareElement = document.querySelector(`.square-${column}-${i}`);
       squareElement.style.backgroundColor = "green";
     }
+    return;
   } else {
-    for (let i = 1; i < 6; i++) {
-      for (let j = 0; j < word.length; j++) {
-        if (word[j] === wordOfTheDay[j]) {
-          let squareElement = document.querySelector(`.square-${column}-${i}`);
-          squareElement.style.backgroundColor = "green";
-        } else {
-          let squareElement = document.querySelector(`.square-${column}-${i}`);
-          squareElement.style.backgroundColor = "red";
-        }
+    for (let j = 0; j < 5; j++) {
+      if (word[j] === wordOfTheDay[j]) {
+        let squareElement = document.querySelector(
+          `.square-${column}-${j + 1}`
+        );
+        squareElement.style.backgroundColor = "green";
+      } /*else if (word.includes(wordOfTheDay[j])) {
+        let squareElement = document.querySelector(
+          `.square-${column}-${word.indexOf(wordOfTheDay[j])}`
+        );
+        squareElement.style.backgroundColor = "yellow";
+      }*/ else {
+        let squareElement = document.querySelector(
+          `.square-${column}-${j + 1}`
+        );
+        squareElement.style.backgroundColor = "red";
       }
     }
   }
+  column++;
+  userWord = [];
+  row = 1;
+  gameIsOver();
 }
+
 createBoard();
+function gameIsOver() {
+  if (column === 7) {
+    alert("Game Over! Try again tomorrow!");
+  }
+}
 
 function clear() {
   userWord = [];
-  row = 0;
+  row = 1;
   for (let i = 1; i < 6; i++) {
     let squareElement = document.querySelector(`.square-${column}-${i}`);
     squareElement.innerHTML = "";

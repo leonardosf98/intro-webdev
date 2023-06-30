@@ -2,7 +2,10 @@ let row = 1;
 let column = 1;
 let userWord = [];
 let wordOfTheDay;
-
+const loadingDiv = document.querySelector(".loading");
+const help = document.querySelector(".help-image");
+const dialogHelp = document.querySelector(".help-dialog");
+const closeDialog = document.querySelector(".close-dialog");
 const wordURL = "https://words.dev-apis.com/word-of-the-day";
 
 function getWordOfTheDay() {
@@ -15,7 +18,9 @@ function getWordOfTheDay() {
     .then(function (processedResponse) {
       wordOfTheDay = processedResponse.word;
     });
+  loadingDiv.style.display = "none";
 }
+
 getWordOfTheDay();
 
 function createBoard() {
@@ -61,6 +66,7 @@ document.addEventListener("keydown", function (event) {
 });
 
 function verifyIfWordExists() {
+  loadingDiv.style.display = "block";
   const validatorURL = "https://words.dev-apis.com/validate-word";
   fetch(validatorURL, {
     method: "POST",
@@ -72,6 +78,7 @@ function verifyIfWordExists() {
       return response.json();
     })
     .then(function (data) {
+      loadingDiv.style.display = "none";
       if (data.validWord === true) {
         verifyWord();
       } else {
@@ -120,6 +127,7 @@ function verifyWord() {
   userWord = [];
   row = 1;
   gameIsOver();
+  verifyRepeat();
 }
 
 createBoard();
@@ -129,6 +137,17 @@ function gameIsOver() {
   }
 }
 
+function verifyRepeat() {
+  let repeatedTimes = 0;
+  const word = userWord.join("").toLocaleLowerCase();
+  for (let j = 0; j < word.length; j++) {
+    if (word[j].includes(wordOfTheDay)) {
+      repeatedTimes++;
+    }
+  }
+  console.log(repeatedTimes);
+}
+
 function clear() {
   userWord = [];
   row = 1;
@@ -136,4 +155,14 @@ function clear() {
     let squareElement = document.querySelector(`.square-${column}-${i}`);
     squareElement.innerHTML = "";
   }
+}
+
+help.addEventListener("click", showHelp);
+closeDialog.addEventListener("click", closeHelp);
+
+function showHelp() {
+  dialogHelp.showModal();
+}
+function closeHelp() {
+  dialogHelp.close();
 }
